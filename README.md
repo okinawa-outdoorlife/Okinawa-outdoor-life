@@ -1,0 +1,1 @@
+# Okinawa-outdoor-life
