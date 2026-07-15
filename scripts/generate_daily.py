@@ -1,7 +1,74 @@
+```python
 from datetime import date
 from pathlib import Path
+import random
 
 today = date.today().strftime("%Y-%m-%d")
+
+# 今日のアウトドアワンポイント
+tips = [
+    "沖縄では突然のスコールに備えてレインウェアを携帯しましょう。",
+    "夏場のキャンプでは熱中症対策として十分な水分補給が重要です。",
+    "海辺のキャンプでは潮位情報を事前に確認しましょう。",
+    "虫よけスプレーを持参すると快適に過ごせます。",
+    "強風の日はテント設営場所を慎重に選びましょう。",
+    "日差しが強い日はタープを活用すると快適に過ごせます。",
+    "キャンプ前には天気予報を確認して安全を確保しましょう。"
+]
+
+tip = random.choice(tips)
+
+# 沖縄おすすめスポット
+spots = [
+    {
+        "name": "県民の森キャンプ場",
+        "description": "自然豊かな環境で初心者にも人気のキャンプ場です。"
+    },
+    {
+        "name": "ネイチャーみらい館",
+        "description": "カヌー体験や自然観察が楽しめる人気スポットです。"
+    },
+    {
+        "name": "屋我地ビーチ",
+        "description": "海を眺めながらアウトドアを楽しめる絶景スポットです。"
+    },
+    {
+        "name": "比地大滝",
+        "description": "沖縄本島最大級の滝が見られるトレッキングコースです。"
+    },
+    {
+        "name": "東村ふれあいヒルギ公園",
+        "description": "マングローブ観察や自然体験が楽しめます。"
+    }
+]
+
+spot = random.choice(spots)
+
+# 注目イベント
+events = [
+    {
+        "title": "県民の森キャンプ体験会",
+        "location": "恩納村",
+        "description": "初心者向けのキャンプ体験イベントです。"
+    },
+    {
+        "title": "比地大滝トレッキング",
+        "location": "国頭村",
+        "description": "沖縄の自然を満喫できる人気トレッキングイベントです。"
+    },
+    {
+        "title": "屋我地島サンセットウォーク",
+        "location": "名護市",
+        "description": "夕日を眺めながら散策できる人気イベントです。"
+    },
+    {
+        "title": "東村マングローブ観察会",
+        "location": "東村",
+        "description": "マングローブの自然を学べる体験型イベントです。"
+    }
+]
+
+event = random.choice(events)
 
 html = f"""
 <!DOCTYPE html>
@@ -38,6 +105,11 @@ section {{
 
 a {{
     color:#006d77;
+    text-decoration:none;
+}}
+
+a:hover {{
+    text-decoration:underline;
 }}
 
 footer {{
@@ -55,7 +127,25 @@ footer {{
 </header>
 
 <section>
-<h2>今週の沖縄アウトドア情報</h2>
+<h2>🎪 本日の注目イベント</h2>
+
+<h3>{event["title"]}</h3>
+
+<p><strong>開催エリア：</strong>{event["location"]}</p>
+
+<p>{event["description"]}</p>
+</section>
+
+<section>
+<h2>📍 今日のおすすめスポット</h2>
+
+<h3>{spot["name"]}</h3>
+
+<p>{spot["description"]}</p>
+</section>
+
+<section>
+<h2>🏕 今週の沖縄アウトドア情報</h2>
 
 <ul>
 <li>キャンプイベント情報をチェック</li>
@@ -66,11 +156,11 @@ footer {{
 </section>
 
 <section>
-<h2>おすすめ記事</h2>
+<h2>📚 おすすめ記事</h2>
 
 <ul>
 <li><a href="../camp-okinawa-top10.html">沖縄おすすめキャンプ場10選</a></li>
-<li><a href="../camp-free-sites.html">沖縄の無料キャンプ場まとめ</a></li>
+<li><a href="../okinawa-free-campgrounds.html">沖縄の無料キャンプ場まとめ</a></li>
 <li><a href="../solo-camp-guide.html">ソロキャンプ初心者ガイド</a></li>
 <li><a href="../camera-beginner-guide.html">初心者向けカメラの選び方</a></li>
 <li><a href="../okinawa-photo-spots-top10.html">沖縄の絶景撮影スポット10選</a></li>
@@ -78,12 +168,9 @@ footer {{
 </section>
 
 <section>
-<h2>今日のアウトドアワンポイント</h2>
+<h2>💡 今日のアウトドアワンポイント</h2>
 
-<p>
-沖縄では突然のスコールに備えて、
-防水バッグやレインウェアを準備しておくと安心です。
-</p>
+<p>{tip}</p>
 </section>
 
 <footer>
@@ -103,3 +190,4 @@ with open(filename, "w", encoding="utf-8") as f:
     f.write(html)
 
 print("created:", filename)
+```
