@@ -1,4 +1,3 @@
-```python
 from datetime import date
 from pathlib import Path
 import random
@@ -190,4 +189,3 @@ with open(filename, "w", encoding="utf-8") as f:
     f.write(html)
 
 print("created:", filename)
-```
