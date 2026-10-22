@@ -23,8 +23,12 @@ content = index_file.read_text(encoding="utf-8")
 start = "<!-- DAILY_ARTICLES_START -->"
 end = "<!-- DAILY_ARTICLES_END -->"
 
-before = content.split(start)[0]
-after = content.split(end)[1]
+if content.count(start) != 1 or content.count(end) != 1:
+    raise ValueError("Daily article markers must each occur exactly once")
+if content.index(start) >= content.index(end):
+    raise ValueError("Daily article markers are out of order")
+before, rest = content.split(start, 1)
+_, after = rest.split(end, 1)
 
 new_content = (
     before

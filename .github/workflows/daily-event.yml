@@ -25,6 +25,9 @@ jobs:
     - name: Update index
       run: python scripts/update_index.py
 
+    - name: Check internal links
+      run: python scripts/check_links.py
+
     - name: Commit changes
       run: |
         git config user.name "github-actions"
