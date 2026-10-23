@@ -1,8 +1,10 @@
-from datetime import date
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from html import escape
 from pathlib import Path
 import random
 
-today = date.today().strftime("%Y-%m-%d")
+today = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y-%m-%d")
 
 # 今日のアウトドアワンポイント
 tips = [
@@ -43,27 +45,28 @@ spots = [
 
 spot = random.choice(spots)
 
-# 注目イベント
+# 確認済みの施設案内（開催未確認のイベント名は生成しない）
 events = [
     {
-        "title": "県民の森キャンプ体験会",
+        "title": "県民の森のキャンプ利用案内",
         "location": "恩納村",
-        "description": "初心者向けのキャンプ体験イベントです。"
+        "description": "キャンプ場の利用方法・予約については公式案内をご確認ください。",
+        "url": "https://www.kenminnomori-obsi.jp/camp.php",
+        "label": "公式サイトで利用案内を見る"
     },
     {
-        "title": "比地大滝トレッキング",
-        "location": "国頭村",
-        "description": "沖縄の自然を満喫できる人気トレッキングイベントです。"
-    },
-    {
-        "title": "屋我地島サンセットウォーク",
+        "title": "屋我地ビーチの施設案内",
         "location": "名護市",
-        "description": "夕日を眺めながら散策できる人気イベントです。"
+        "description": "ビーチやキャンプ場の利用方法・営業状況は公式サイトをご確認ください。",
+        "url": "https://yagaji-beach.com/",
+        "label": "公式サイトで利用案内を見る"
     },
     {
-        "title": "東村マングローブ観察会",
+        "title": "東村ふれあいヒルギ公園の観光案内",
         "location": "東村",
-        "description": "マングローブの自然を学べる体験型イベントです。"
+        "description": "公園の施設情報・問い合わせ先は東村の公式観光案内をご確認ください。",
+        "url": "https://www.vill.higashi.okinawa.jp/soshikikarasagasu/kikakukankoka/omiyagetokusanhin/1083.html",
+        "label": "東村公式サイトで案内を見る"
     }
 ]
 
@@ -126,13 +129,15 @@ footer {{
 </header>
 
 <section>
-<h2>🎪 本日の注目イベント</h2>
+<h2>🎪 本日のアウトドア案内</h2>
 
-<h3>{event["title"]}</h3>
+<h3><a href="{escape(event['url'], quote=True)}" target="_blank" rel="noopener noreferrer">{escape(event["title"])}</a></h3>
 
 <p><strong>開催エリア：</strong>{event["location"]}</p>
 
-<p>{event["description"]}</p>
+<p>{escape(event["description"])}</p>
+<p><a href="{escape(event['url'], quote=True)}" target="_blank" rel="noopener noreferrer">{escape(event["label"])} ↗</a></p>
+<p><small>施設の案内です。本日開催のイベントを示すものではありません。営業日・予約・開催情報はリンク先をご確認ください。</small></p>
 </section>
 
 <section>
